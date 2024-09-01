@@ -46,13 +46,11 @@ def process_kobo_data(data):
 
 def save_records_to_db(db: Session, records):
     stmt = insert(KoboRecord).values(records)
-    stmt = stmt.on_conflict_do_update(
-        index_elements=['kobo_id'],
-        set_={
-            c.key: c for c in stmt.excluded if c.key not in ['id', 'kobo_id', 'inserted_at']
+    stmt = stmt.on_duplicate_key_update(
+        **{
+            c.key: c for c in stmt.inserted if c.key not in ['id', 'kobo_id', 'inserted_at']
         }
     )
-    stmt = stmt.returning(KoboRecord.id)
     result = db.execute(stmt)
     db.commit()
     return result.fetchall()
