@@ -2,7 +2,7 @@ import requests
 from sqlalchemy.orm import Session
 from .models import KoboRecord
 from sqlalchemy.dialects.mysql import insert
-from sqlalchemy import update
+from sqlalchemy import func, update
 
 def extract_data_from_kobo(limit=1000, offset=0):
     url = f"https://kf.kobotoolbox.org/api/v2/assets/aW9w8jHjn4Cj8SSQ5VcojK/data.json?limit={limit}&offset={offset}"
@@ -46,14 +46,26 @@ def process_kobo_data(data):
 
 def save_records_to_db(db: Session, records):
     stmt = insert(KoboRecord).values(records)
-    stmt = stmt.on_duplicate_key_update(
-        **{
-            c.key: c for c in stmt.inserted if c.key not in ['id', 'kobo_id', 'inserted_at']
-        }
-    )
-    result = db.execute(stmt)
-    db.commit()
-    return result.fetchall()
+    
+    # Manually set fields that should be updated
+    update_data = {
+        key: stmt.inserted[key] for key in stmt.inserted._columns.keys() 
+        if key not in ['id', 'kobo_id', 'inserted_at']
+    }
+    
+    # Handle the updated_at field separately to set it to the current time
+    update_data['updated_at'] = func.now()
+
+    stmt = stmt.on_duplicate_key_update(**update_data)
+    
+    try:
+        result = db.execute(stmt)
+        db.commit()
+        return result.fetchall()
+    except Exception as e:
+        db.rollback()
+        print(f"An error occurred while saving records: {e}")
+        return None
 
 def fetch_and_save_data(db: Session, batch_size=1000):
     offset = 0
