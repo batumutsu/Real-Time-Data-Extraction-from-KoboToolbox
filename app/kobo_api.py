@@ -76,4 +76,4 @@ def fetch_and_save_data(db: Session, batch_size=1000):
         if len(processed_data) < batch_size:
             break
         
-        offset += batch_size
+        offset += 1
