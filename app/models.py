@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Date, DateTime, Integer, func
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.dialects.mysql import CHAR
 import uuid
 
 Base = declarative_base()
@@ -8,7 +8,7 @@ Base = declarative_base()
 class KoboRecord(Base):
     __tablename__ = "kobo_records"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True, nullable=False)
+    id = Column(CHAR(36), primary_key=True, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
     kobo_id = Column(Integer, unique=True, index=True)
     survey_date = Column(Date)
     unique_id = Column(String)

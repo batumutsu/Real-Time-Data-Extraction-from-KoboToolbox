@@ -1,7 +1,7 @@
 import requests
 from sqlalchemy.orm import Session
 from .models import KoboRecord
-from sqlalchemy.dialects.postgresql import insert
+from sqlalchemy.dialects.mysql import insert
 from sqlalchemy import update
 
 def extract_data_from_kobo(limit=1000, offset=0):
