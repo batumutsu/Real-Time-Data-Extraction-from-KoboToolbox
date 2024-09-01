@@ -4,6 +4,10 @@ from .models import KoboRecord
 from .kobo_api import process_kobo_data
 import json
 import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -31,8 +35,10 @@ def webhook():
         return jsonify({"status": "error", "message": "Invalid data format"}), 400
 
 def register_webhook():
-    url = "http://dev.inkomoko.com:1055/register_webhook"
-    payload = json.dumps({"url": "http://102.22.140.126:4000/api/webhook/real-time-updates"})
+    INKOMOKO_REGISTER_WEBHOOK_URL = os.getenv('INKOMOKO_REGISTER_WEBHOOK_URL')
+    REAL_TIME_POST_ENDPOINT_URL = os.getenv('REAL_TIME_POST_ENDPOINT_URL')
+    url = INKOMOKO_REGISTER_WEBHOOK_URL
+    payload = json.dumps({"url": REAL_TIME_POST_ENDPOINT_URL})
     headers = {'Content-Type': 'application/json'}
     response = requests.post(url, headers=headers, data=payload)
     if response.status_code == 200:
