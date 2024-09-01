@@ -38,11 +38,12 @@ def register_webhook():
     INKOMOKO_REGISTER_WEBHOOK_URL = os.getenv('INKOMOKO_REGISTER_WEBHOOK_URL')
     REAL_TIME_POST_ENDPOINT_URL = os.getenv('REAL_TIME_POST_ENDPOINT_URL')
     url = INKOMOKO_REGISTER_WEBHOOK_URL
-    payload = json.dumps({"url": REAL_TIME_POST_ENDPOINT_URL})
-    headers = {'Content-Type': 'application/json'}
-    response = requests.post(url, headers=headers, data=payload)
-    if response.status_code == 200:
-        return response
-    else:
-        raise Exception(f"Failed to register webhook: {response.text}")
+    return "Hello, how have you been?"
+    # payload = json.dumps({"url": REAL_TIME_POST_ENDPOINT_URL})
+    # headers = {'Content-Type': 'application/json'}
+    # response = requests.post(url, headers=headers, data=payload)
+    # if response.status_code == 200:
+    #     return response
+    # else:
+    #     raise Exception(f"Failed to register webhook: {response.text}")
     
