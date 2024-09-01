@@ -13,7 +13,10 @@ app = Flask(__name__)
 
 @app.route('/api/webhook/real-time-updates', methods=['POST'])
 def webhook():
-    return "Hello, how have you been?"
+    INKOMOKO_REGISTER_WEBHOOK_URL = os.getenv('INKOMOKO_REGISTER_WEBHOOK_URL')
+    REAL_TIME_POST_ENDPOINT_URL = os.getenv('REAL_TIME_POST_ENDPOINT_URL')
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    return INKOMOKO_REGISTER_WEBHOOK_URL + ' ' + REAL_TIME_POST_ENDPOINT_URL + ' ' + DATABASE_URL
     # data = request.json
     # db = next(get_db())
     
