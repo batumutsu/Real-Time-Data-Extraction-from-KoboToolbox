@@ -27,5 +27,5 @@ class KoboRecord(Base):
     education = Column(String(255))
     business_status = Column(String(255))
     submission_time = Column(DateTime)
-    inserted_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    inserted_at = Column(DateTime(timezone=True), insert_default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
