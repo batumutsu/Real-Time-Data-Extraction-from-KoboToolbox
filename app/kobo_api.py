@@ -3,11 +3,17 @@ from sqlalchemy.orm import Session
 from .models import KoboRecord
 from sqlalchemy.dialects.mysql import insert
 from sqlalchemy import func, update
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 def extract_data_from_kobo(limit=1000, offset=0):
-    url = f"https://kf.kobotoolbox.org/api/v2/assets/aW9w8jHjn4Cj8SSQ5VcojK/data.json?limit={limit}&offset={offset}"
+    KOBO_ASSET_ID = os.getenv('KOBO_ASSET_ID')
+    KOBO_TOKEN = os.getenv('KOBO_TOKEN')
+    url = f"https://kf.kobotoolbox.org/api/v2/assets/{KOBO_ASSET_ID}/data.json?limit={limit}&offset={offset}"
     headers = {
-        'Authorization': 'Token f24b97a52f76779e97b0c10f80406af5e9590eaf',
+        'Authorization': f'Token {KOBO_TOKEN}',
         'Cookie': 'django_language=en'
     }
     response = requests.get(url, headers=headers)

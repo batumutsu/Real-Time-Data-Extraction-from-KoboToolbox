@@ -11,7 +11,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-@app.route('/api/webhook/real-time-updates', methods=['POST'])
+@app.route('/api/real-time-updates', methods=['POST'])
 def webhook():
     data = request.json
     db = next(get_db())
