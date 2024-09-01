@@ -1,29 +1,33 @@
-from sqlalchemy import Column, String, Date, DateTime, Integer, func
+from sqlalchemy import Column, String, Date, DateTime, Integer, func, BINARY
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.dialects.mysql import VARCHAR  # Import VARCHAR for MySQL string type
+import uuid
 
 Base = declarative_base()
 
+def generate_uuid():
+    return uuid.uuid4().bytes
+
 class KoboRecord(Base):
-    __tablename__ = "kobo_records"  # Use double underscores for table name
-    id = Column(String(length=36), primary_key=True, unique=True, nullable=False)
+    __tablename__ = "kobo_records"
+    
+    id = Column(BINARY(16), primary_key=True, default=generate_uuid, unique=True, nullable=False)
     kobo_id = Column(Integer, unique=True, index=True)
     survey_date = Column(Date)
-    unique_id = Column(VARCHAR(length=255))  # Use VARCHAR for potentially long strings
-    country = Column(VARCHAR(length=255))
-    region = Column(VARCHAR(length=255))
-    bda_name = Column(VARCHAR(length=255))
-    cohort = Column(VARCHAR(length=255))
-    program = Column(VARCHAR(length=255))
-    client_name = Column(VARCHAR(length=255))
-    client_id = Column(VARCHAR(length=255))
-    location = Column(VARCHAR(length=255))
-    phone = Column(VARCHAR(length=255))
-    gender = Column(VARCHAR(length=255))
+    unique_id = Column(String)
+    country = Column(String)
+    region = Column(String)
+    bda_name = Column(String)
+    cohort = Column(String)
+    program = Column(String)
+    client_name = Column(String)
+    client_id = Column(String)
+    location = Column(String)
+    phone = Column(String)
+    gender = Column(String)
     age = Column(Integer)
-    nationality = Column(VARCHAR(length=255))
-    education = Column(VARCHAR(length=255))
-    business_status = Column(VARCHAR(length=255))
+    nationality = Column(String)
+    education = Column(String)
+    business_status = Column(String)
     submission_time = Column(DateTime)
-    inserted_at = Column(DateTime(timezone=True), default=func.now(), nullable=False)
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now(), nullable=False)
+    inserted_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
