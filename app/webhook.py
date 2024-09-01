@@ -1,3 +1,4 @@
+from http import HTTPStatus
 from flask import Flask, request, jsonify
 from .database import get_db
 from .models import KoboRecord
@@ -40,7 +41,7 @@ def register_webhook():
     url = INKOMOKO_REGISTER_WEBHOOK_URL
     payload = json.dumps({"url": REAL_TIME_POST_ENDPOINT_URL})
     headers = {'Content-Type': 'application/json'}
-    response = requests.post(url, headers=headers, data=payload)
+    response = HTTPStatus.BAD_REQUEST #requests.post(url, headers=headers, data=payload)
     if response.status_code == 200:
         return response
     else:
