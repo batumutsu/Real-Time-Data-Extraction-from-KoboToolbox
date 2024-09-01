@@ -1,31 +1,29 @@
 from sqlalchemy import Column, String, Date, DateTime, Integer, func
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.dialects.mysql import CHAR
-import uuid
+from sqlalchemy.dialects.mysql import VARCHAR  # Import VARCHAR for MySQL string type
 
 Base = declarative_base()
 
 class KoboRecord(Base):
-    __tablename__ = "kobo_records"
-
-    id = Column(CHAR(36), primary_key=True, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
+    __tablename__ = "kobo_records"  # Use double underscores for table name
+    id = Column(String(length=36), primary_key=True, unique=True, nullable=False)
     kobo_id = Column(Integer, unique=True, index=True)
     survey_date = Column(Date)
-    unique_id = Column(String(255))  # Set length to 255, or whatever is appropriate
-    country = Column(String(255))
-    region = Column(String(255))
-    bda_name = Column(String(255))
-    cohort = Column(String(255))
-    program = Column(String(255))
-    client_name = Column(String(255))
-    client_id = Column(String(255))
-    location = Column(String(255))
-    phone = Column(String(20))  # Adjust length according to the format you expect
-    gender = Column(String(10))  # Adjust length according to the values you expect (e.g., "Male", "Female")
+    unique_id = Column(VARCHAR(length=255))  # Use VARCHAR for potentially long strings
+    country = Column(VARCHAR(length=255))
+    region = Column(VARCHAR(length=255))
+    bda_name = Column(VARCHAR(length=255))
+    cohort = Column(VARCHAR(length=255))
+    program = Column(VARCHAR(length=255))
+    client_name = Column(VARCHAR(length=255))
+    client_id = Column(VARCHAR(length=255))
+    location = Column(VARCHAR(length=255))
+    phone = Column(VARCHAR(length=255))
+    gender = Column(VARCHAR(length=255))
     age = Column(Integer)
-    nationality = Column(String(255))
-    education = Column(String(255))
-    business_status = Column(String(255))
+    nationality = Column(VARCHAR(length=255))
+    education = Column(VARCHAR(length=255))
+    business_status = Column(VARCHAR(length=255))
     submission_time = Column(DateTime)
-    inserted_at = Column(DateTime(timezone=True), insert_default=func.now(), nullable=False)
-    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
+    inserted_at = Column(DateTime(timezone=True), default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now(), nullable=False)
