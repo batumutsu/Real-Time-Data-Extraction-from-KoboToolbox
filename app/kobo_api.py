@@ -2,7 +2,7 @@ import requests
 from sqlalchemy.orm import Session
 from .models import KoboRecord
 from sqlalchemy.dialects.mysql import insert
-from sqlalchemy import update
+from sqlalchemy import func, update
 
 def extract_data_from_kobo(limit=1000, offset=0):
     url = f"https://kf.kobotoolbox.org/api/v2/assets/aW9w8jHjn4Cj8SSQ5VcojK/data.json?limit={limit}&offset={offset}"
@@ -37,7 +37,8 @@ def process_kobo_data(data):
             'nationality': record.get('sec_c/cd_nationality'),
             'education': record.get('sec_c/cd_education'),
             'business_status': record.get('group_mx5fl16/cd_biz_status'),
-            'submission_time': record.get('_submission_time')
+            'submission_time': record.get('_submission_time'),
+            'updated_at': func.now()
         }
         processed_data.append(processed_record)
     length = len(processed_data)
