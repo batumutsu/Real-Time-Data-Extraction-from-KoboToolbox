@@ -25,7 +25,7 @@ This project extracts data from KoboToolbox and saves it to a database, handling
 
 ## Usage
 
-- The initial data extraction is performed by running `app/main.py`
+- The initial data extraction is performed by running `python run.py`
 - Real-time updates are handled by the webhook endpoint at `/api/real-time-updates`
 - The webhook will be registered using the URL variable in .env file called `REAL_TIME_POST_ENDPOINT_URL`
 
