@@ -152,26 +152,6 @@ class TestKoboDataProcessing(unittest.TestCase):
         db.execute.assert_called_once()
         db.commit.assert_called_once()
     
-    # def test_save_records_to_db(self):
-    #     data = extract_data_from_kobo()
-    #     processed_data = process_kobo_data(data)
-
-    #     # Call the actual save function
-    #     save_records_to_db(self.session, processed_data)
-
-    #     # Verify the record was saved
-    #     test_kobo_id = processed_data[0]['kobo_id']
-    #     result = self.session.execute(
-    #     text("SELECT * FROM kobo_records WHERE kobo_id = :test_kobo_id"),
-    #     {"test_kobo_id": test_kobo_id}
-    # ).fetchone()
-    #     self.assertIsNotNone(result)
-    #     self.assertEqual(result['kobo_id'], test_kobo_id)
-
-    #     # Clean up
-    #     self.session.rollback()  # Or delete the test records manually
-    #     self.session.close()
-    
     
     def test_save_records_to_db(self):
         data = extract_data_from_kobo()
