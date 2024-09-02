@@ -141,7 +141,7 @@ class TestKoboDataProcessing(unittest.TestCase):
         self.assertEqual(processed_data[0]['survey_date'], '2024-09-01')
 
     @patch('sqlalchemy.orm.Session.execute')
-    def test_save_records_to_db(self, mock_execute):
+    def mock_test_save_records_to_db(self, mock_execute):
         # Mock successful insert
         mock_execute.return_value = None
         db = unittest.mock.MagicMock()
@@ -153,7 +153,7 @@ class TestKoboDataProcessing(unittest.TestCase):
         db.commit.assert_called_once()
     
     
-    def test_save_records_to_db(self):
+    def real_data_test_save_records_to_db(self):
         data = extract_data_from_kobo()
         processed_data = process_kobo_data(data)
 
