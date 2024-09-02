@@ -65,10 +65,16 @@ The database uses a single table `kobo_records` with the following schema:
 
 ## Assumptions
 
-- The KoboToolbox API endpoint and token remain constant
-- The KoboToolbox API endpoint is paginated, so the limit and offset parameters are used
-- The database is MySQL (change the engine in `database.py` if using a different database)
-- The webhook endpoint is publicly accessible for receiving real-time updates
+- KoboToolbox API: This project assumes that the KoboToolbox API is available and accessible with the provided token and endpoint.
+- Pagination: The KoboToolbox API endpoint uses pagination, and can take limit and offset parameters.
+- Database: A MySQL database is set up and properly configured with the necessary schemas and permissions. If using a different database, adjust the engine settings in `database.py`.
+- Webhook Accessibility: The webhook endpoint is publicly accessible to receive real-time updates.
+- Database: This project assumes that a database is set up and configured correctly, with the necessary schemas and permissions.
+- Environment Variables: The required environment variables (DATABASE_URL, DATABASE_TEST_URL, INKOMOKO_REGISTER_WEBHOOK_URL, REAL_TIME_POST_ENDPOINT_URL, KOBO_TOKEN, KOBO_ASSET_ID) are correctly set.
+- Data Structure: The data received from the KoboToolbox API is in the expected format and structure.
+- User Permissions: The user running this project has the necessary permissions to access the database and KoboToolbox API.
+- Network Connectivity: The system running this project has a stable internet connection to access the KoboToolbox API.
+- Compatibility: The user has created a python virtual environment and has Docker installed to run this project.
 
 ## Testing
 
