@@ -41,7 +41,7 @@ def register_webhook():
     url = INKOMOKO_REGISTER_WEBHOOK_URL
     payload = json.dumps({"url": REAL_TIME_POST_ENDPOINT_URL})
     headers = {'Content-Type': 'application/json'}
-    response = HTTPStatus.BAD_REQUEST #requests.post(url, headers=headers, data=payload)
+    response = requests.post(url, headers=headers, data=payload)
     if response.status_code == 200:
         return response
     else:
