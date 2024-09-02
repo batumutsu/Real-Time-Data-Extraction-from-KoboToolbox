@@ -70,7 +70,7 @@ The database uses a single table `kobo_records` with the following schema:
 - Database: A MySQL database is set up and properly configured with the necessary schemas and permissions. If using a different database, adjust the engine settings in `database.py`.
 - Webhook Accessibility: The webhook endpoint is publicly accessible to receive real-time updates.
 - Database: This project assumes that a database is set up and configured correctly, with the necessary schemas and permissions.
-- Environment Variables: The required environment variables (DATABASE_URL, DATABASE_TEST_URL, INKOMOKO_REGISTER_WEBHOOK_URL, REAL_TIME_POST_ENDPOINT_URL, KOBO_TOKEN, KOBO_ASSET_ID) are correctly set.
+- Environment Variables: The required environment variables (`DATABASE_URL`, `DATABASE_TEST_URL`, `INKOMOKO_REGISTER_WEBHOOK_URL`, `REAL_TIME_POST_ENDPOINT_URL`, `KOBO_TOKEN`, `KOBO_ASSET_ID`) are correctly set.
 - Data Structure: The data received from the KoboToolbox API is in the expected format and structure.
 - User Permissions: The user running this project has the necessary permissions to access the database and KoboToolbox API.
 - Network Connectivity: The system running this project has a stable internet connection to access the KoboToolbox API.
