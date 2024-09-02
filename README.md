@@ -13,7 +13,7 @@ This project extracts data from KoboToolbox and saves it to a database, handling
 7. Create test user: `docker-compose exec -T mysql mysql -u root -p quick_start -e "CREATE USER 'test_user'@'%' IDENTIFIED BY 'test_user';"`
 8. Grant permissions to test user: `docker-compose exec -T mysql mysql -u root -p quick_start -e "GRANT ALL PRIVILEGES ON *.* TO 'test_user'@'%' WITH GRANT OPTION;"`
 9. Reload permissions: `docker-compose exec -T mysql mysql -u root -p quick_start -e "FLUSH PRIVILEGES;"`
-10. Create .env file and add these values:
+10. Create .env file and add these variables:
     1. `DATABASE_URL` : "mysql+pymysql://username:password@localhost/databasename"
     2. `DATABASE_TEST_URL` : "mysql+pymysql://test_user:test_user@localhost/test_db"
     3. `INKOMOKO_REGISTER_WEBHOOK_URL` : "http://dev.inkomoko.com:1055/register_webhook"
