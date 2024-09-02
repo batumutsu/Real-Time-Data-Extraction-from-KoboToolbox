@@ -69,7 +69,6 @@ def save_records_to_db(db: Session, records):
     )
     result = db.execute(stmt)
     db.commit()
-    # return result.fetchall()
 
 def fetch_and_save_data(db: Session, batch_size=1000):
     offset = 0
