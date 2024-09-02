@@ -8,7 +8,7 @@ This project extracts data from KoboToolbox and saves it to a database, handling
 2. Create a virtual environment: `python -m venv .venv`
 3. Activate the virtual environment: `source .venv/bin/activate`
 4. Install dependencies: `pip install -r requirements.txt`
-6. Get mySQL running: `docker-compose up -d`(This will require docker install to be installed)
+6. Get mySQL running: `docker-compose up -d`(This will require docker to be installed)
 7. Create test database: `docker-compose exec -T mysql mysql -u root -p quick_start -e "CREATE DATABASE test_db;"`
 8. Create test user: `docker-compose exec -T mysql mysql -u root -p quick_start -e "CREATE USER 'test_user'@'%' IDENTIFIED BY 'test_user';"`
 9. Grant permissions to test user: `docker-compose exec -T mysql mysql -u root -p quick_start -e "GRANT ALL PRIVILEGES ON *.* TO 'test_user'@'%' WITH GRANT OPTION;"`
