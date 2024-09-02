@@ -14,12 +14,12 @@ This project extracts data from KoboToolbox and saves it to a database, handling
 8. Grant permissions to test user: `docker-compose exec -T mysql mysql -u root -p quick_start -e "GRANT ALL PRIVILEGES ON *.* TO 'test_user'@'%' WITH GRANT OPTION;"`
 9. Reload permissions: `docker-compose exec -T mysql mysql -u root -p quick_start -e "FLUSH PRIVILEGES;"`
 10. Create .env file and add these variables:
-    1. `DATABASE_URL` : "mysql+pymysql://username:password@localhost/databasename"
-    2. `DATABASE_TEST_URL` : "mysql+pymysql://test_user:test_user@localhost/test_db"
-    3. `INKOMOKO_REGISTER_WEBHOOK_URL` : "http://dev.inkomoko.com:1055/register_webhook"
-    4. `REAL_TIME_POST_ENDPOINT_URL` : "https://batumutsu.pythonanywhere.com/api/real-time-updates"
-    5. `KOBO_TOKEN` : "f24b97a52f76779e97b0c10f80406af5e9590eaf"
-    6. `KOBO_ASSET_ID` : "aW9w8jHjn4Cj8SSQ5VcojK"
+    1. `DATABASE_URL` : `mysql+pymysql://username:password@localhost/databasename`
+    2. `DATABASE_TEST_URL` : `mysql+pymysql://test_user:test_user@localhost/test_db`
+    3. `INKOMOKO_REGISTER_WEBHOOK_URL` : `http://dev.inkomoko.com:1055/register_webhook`
+    4. `REAL_TIME_POST_ENDPOINT_URL` : `https://batumutsu.pythonanywhere.com/api/real-time-updates`
+    5. `KOBO_TOKEN` : `f24b97a52f76779e97b0c10f80406af5e9590eaf`
+    6. `KOBO_ASSET_ID` : `aW9w8jHjn4Cj8SSQ5VcojK`
 11. Run the initial data extraction, register the webhook server and start the webhook server: `python run.py`
 12. Run tests: `python -m pytest`
 
